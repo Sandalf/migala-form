@@ -24,6 +24,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 10px
 `;
 
 const ButtonText = styled.h3`

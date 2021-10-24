@@ -3,8 +3,10 @@ import styled from "styled-components";
 import {Input} from "src/theme/components/Input/Input";
 import {MainButton} from "src/theme/components/MainButton/MainButton";
 
-
-export const RegisterSection = () => {
+interface RegisterSectionProps {
+    handleRegister: () => void
+}
+export const RegisterSection = ({ handleRegister }: RegisterSectionProps) => {
 
     const handleInputChange = () => {
 
@@ -13,13 +15,13 @@ export const RegisterSection = () => {
     return(
         <RegisterSectionContainer className="animated slideInRight">
 
-            <Input label={"Nombre (s)"} placeholder={"Juanito"} value={""} onChange={handleInputChange}/>
-            <Input label={"Apellidos"} placeholder={"Perez Perez"} value={""} onChange={handleInputChange}/>
-            <Input label={"Correo electronico"} placeholder={"algo@algo.com"} value={""} onChange={handleInputChange}/>
-            <Input label={"Curp"} placeholder={"CURP9342HVZRP90S"} value={""} onChange={handleInputChange}/>
+            <Input label={"Nombre (s)"} required={true} placeholder={"Juanito"} value={""} onChange={handleInputChange}/>
+            <Input label={"Apellidos"} required={true} placeholder={"Perez Perez"} value={""} onChange={handleInputChange}/>
+            <Input label={"Correo electronico"} required={true} placeholder={"algo@algo.com"} value={""} onChange={handleInputChange}/>
+            <Input label={"Curp"} required={true} placeholder={"CURP9342HVZRP90S"} value={""} onChange={handleInputChange}/>
 
             <ButtonContainer>
-                <MainButton title={"Registrar"} />
+                <MainButton title={"Registrar"} onAction={handleRegister} />
             </ButtonContainer>
 
         </RegisterSectionContainer>

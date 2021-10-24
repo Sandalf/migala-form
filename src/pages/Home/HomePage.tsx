@@ -3,8 +3,15 @@ import styled from "styled-components";
 
 import {InformativeSection} from "src/pages/Home/InformativeSection";
 import {RegisterSection} from "src/pages/Home/RegisterSection";
+import {useHistory} from "react-router-dom";
 
 export const HomePage = () => {
+
+    const history = useHistory()
+
+    const saveRegister = () => {
+        history.push("/form")
+    }
 
     return(
         <HomePageContainer>
@@ -14,8 +21,9 @@ export const HomePage = () => {
             </HomeSections>
 
             <HomeSections>
-                <RegisterSection />
+                <RegisterSection handleRegister={saveRegister}/>
             </HomeSections>
+
         </HomePageContainer>
     )
 }

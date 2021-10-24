@@ -38,4 +38,6 @@ export interface SurveyModel {
     surveyTitle: string;
     backgroundColor: string;
     questionsGroups: QuestionsGroup[];
+
+    isExpanded?: boolean
 }

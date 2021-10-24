@@ -7,7 +7,7 @@ import {generateUniqSerial} from "src/utils/GeneralUtils";
 export const Survey: Array<SurveyModel> = [
     {
         id: generateUniqSerial(),
-        surveyTitle: "Queremos saber sobre ti",
+        surveyTitle: "Información General",
         backgroundColor: "#8f02a5",
         questionsGroups: [
             {
@@ -108,7 +108,7 @@ export const Survey: Array<SurveyModel> = [
     },
     {
         id: generateUniqSerial(),
-        surveyTitle: "Ahora queremos saber, ¿qué haces?",
+        surveyTitle: "Información Laboral",
         backgroundColor: "#7147c2",
         questionsGroups: [
             {
@@ -247,7 +247,7 @@ export const Survey: Array<SurveyModel> = [
     },
     {
         id: generateUniqSerial(),
-        surveyTitle: "Ahora queremos saber, ¿Que podrias hacer?",
+        surveyTitle: "Como podrias apoyar al proyecto",
         backgroundColor: "#9c9ba0",
         questionsGroups: [
             {

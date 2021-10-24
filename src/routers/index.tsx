@@ -4,6 +4,7 @@ import {createBrowserHistory} from "history";
 import {Header} from "src/theme/components/Header/Header";
 import {HomePage} from "src/pages/Home/HomePage";
 import styled from "styled-components";
+import {MainForm} from "src/pages/Form/MainForm";
 
 const history = createBrowserHistory();
 
@@ -39,6 +40,7 @@ export const MainRouter = () => {
                     <PagesContainer>
 
                         <Switch>
+                            <Route exact path="/form" component={MainForm}/>
                             <Route path="/" component={HomePage}/>
                         </Switch>
 
@@ -69,4 +71,6 @@ const RouteContentContainer = styled.div`
 const PagesContainer = styled.div`
   width: 100%;
   height: 700px;
+
+  transition: all 1s;
 `

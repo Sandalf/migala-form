@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {LightText} from "src/theme/styles/generalstyles/Text";
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-    label?: string,
+    label?: string
 }
 
 export const Input = (
@@ -11,7 +11,7 @@ export const Input = (
 
     return(
         <InputContainer className="animated fadeIn">
-            <Label>{label}</Label>
+            <Label>{label} { props.required && <RequiredLabel>*</RequiredLabel> }</Label>
             <InputItem
                 value={props.value}
                 placeholder={props.placeholder}
@@ -36,6 +36,11 @@ const InputContainer = styled.div`
 
 const Label = styled(LightText)`
   padding: 10px 0;
+`;
+
+const RequiredLabel = styled(LightText)`
+  padding: 10px 0;
+  color: ${props => props.theme.requiredLabel};
 `;
 
 const InputItem = styled.input`

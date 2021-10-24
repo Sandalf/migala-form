@@ -8,7 +8,8 @@ export const _baseColors = {
     black: '#000000',
 
     windsor: '#3D2B70',
-    stormGray: '#686c7a',
+    stormGray: '#2F3A4A',
+    grayChateau: '#9EA2A9',
     pattensBlue: '#F8FAFC',
     blueHaze: '#B8BCCA',
 
