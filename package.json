@@ -27,6 +27,7 @@
     "eject": "react-scripts eject",
     "compile": "npm run build && cd build && jar -cvf migala.war ."
   },
+  "proxy": "https://cors-anywhere.herokuapp.com",
   "eslintConfig": {
     "extends": [
       "react-app",

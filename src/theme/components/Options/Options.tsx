@@ -41,9 +41,9 @@ const OptionPaddingItem = styled.div`
 `;
 
 const OptionItem = styled.div`
-  width: calc(75px + 1vmin);
-  height: calc(75px + 1vmin);
-  background: #ff7903;
+  width: calc(150px + 1vmin);
+  height: calc(35px + 1vmin);
+  background: ${props => props.theme.buttonBackground};
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -52,11 +52,11 @@ const OptionItem = styled.div`
   transition: all 0.5s;
 
   span {
-    color: white;
+    color: ${props => props.theme.buttonText};
   }
   
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     
     span{
       animation-name: pulse;

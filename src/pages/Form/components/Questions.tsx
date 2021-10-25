@@ -10,6 +10,7 @@ import {CheckBoxInputsElement} from "src/theme/components/CheckBox/CheckBoxInput
 import {SelectInput} from "src/theme/components/Select/SelectInput";
 import {LightText} from "src/theme/styles/generalstyles/Text";
 import {MainButton} from "src/theme/components/MainButton/MainButton";
+import {RadioInputs} from "src/theme/components/RadioInputs/RadioInputs";
 
 interface QuestionsProps {
     questions: Array<QuestionsGroup>,
@@ -39,7 +40,6 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
 
         setCurrentIndexSurveyGroup(prevState => prevState + 1)
     }
-
 
     const decrementCounter = () => {
         if(currentIndexSurveyGroup === 0){
@@ -76,7 +76,6 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
 
                         { question.type === 'date' &&
                         <DatePicker />
-
                         }
 
                         { question.type === 'address' &&
@@ -94,6 +93,11 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
                         { question.type === 'select' &&
                         <SelectInput placeHolder={question.placeHolder} options={question.options || []}/>
                         }
+
+                        { question.type === 'radio' &&
+                        <RadioInputs placeHolder={question.placeHolder} options={question.options || []}/>
+                        }
+
                     </QuestionSingle>
                 ))
                 }

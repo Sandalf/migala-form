@@ -1,17 +1,26 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {FaChevronDown} from "react-icons/all";
+import {FaChevronDown, FaChevronUp} from "react-icons/all";
 import {Option} from "src/model/Survey/SurveyModel";
 
 interface SelectInputProps {
     placeHolder?: string,
-    options: Array<Option>
+    options: Array<Option>,
+    withInputContainer?: Boolean,
+    onSelectionChange?: (option?: Option) => void,
+    inputProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 }
 
-export const SelectInput = ( { placeHolder, options }: SelectInputProps) => {
+export const SelectInput = ({
+        placeHolder,
+        options,
+        withInputContainer = false,
+        inputProps = {},
+        onSelectionChange = () => {}
+    }: SelectInputProps) => {
 
-    const [ showExitAnimation, setShowExitAnimation ] = useState(true)
-    const [isOpen, setIsOpen] = useState(false)
+    const [showExitAnimation, setShowExitAnimation] = useState(!withInputContainer)
+    const [isOpen, setIsOpen] = useState(!!withInputContainer)
     const [label, setLabel] = useState(placeHolder)
 
     const toggleOpen = () => {
@@ -24,22 +33,46 @@ export const SelectInput = ( { placeHolder, options }: SelectInputProps) => {
     const handleOptionSelected = (option: Option) => {
         toggleOpen()
         setLabel(option.value)
+        onSelectionChange(option)
     }
 
-    return(
+    return (
         <SelectMainContainer>
             <SelectInputContainer onClick={toggleOpen}>
-                <LabelItem>{ label }</LabelItem>
-                <Chevron showExitAnimation={showExitAnimation}/>
+
+                {withInputContainer &&
+                <LabelItemInput
+                    value={inputProps.value}
+                    onChange={inputProps.onChange}
+                    disabled={inputProps.disabled}
+                    type={inputProps.type}
+                    onClick={(event) => {
+                        event.stopPropagation()
+                    }}
+                />
+                }
+
+                {!withInputContainer &&
+                <LabelItem>{label}</LabelItem>
+                }
+
+
+                {isOpen &&
+                <ChevronUp className={"animated-fast rotateIn"}/>
+                }
+                {!isOpen &&
+                <ChevronDown className={"animated-fast rotateIn"}/>
+                }
             </SelectInputContainer>
 
-            { isOpen &&
-                <ItemOptionContainer showExitAnimation={showExitAnimation}>
-                    { options.map(option => (
-                        <ItemOptionText key={option.id} onClick={() => handleOptionSelected(option)}>{option.value}</ItemOptionText>
-                    ))
-                    }
-                </ItemOptionContainer>
+            {isOpen &&
+            <ItemOptionContainer showexitanimation={showExitAnimation}>
+                {options.map(option => (
+                    <ItemOptionText key={option.id}
+                                    onClick={() => handleOptionSelected(option)}>{option.value}</ItemOptionText>
+                ))
+                }
+            </ItemOptionContainer>
             }
         </SelectMainContainer>
     )
@@ -52,9 +85,10 @@ const SelectMainContainer = styled.div`
 
 const SelectInputContainer = styled.div`
   width: 100%;
-  height: 45px;
-  border: 1px solid ${props => props.theme.text};
-  border-radius: 10px;
+  height: 60px;
+  box-shadow: 0 0 2px 0 ${props => props.theme.slateGray};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -71,19 +105,36 @@ const LabelItem = styled.h1`
   font-size: calc(12px + 1vmin);
   color: ${props => props.theme.text};
   padding: 0 10px 0 0;
-  
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-const Chevron = styled(FaChevronDown)<any>`
+const LabelItemInput = styled.input`
+  border-inline: none;
+  background: transparent;
+  outline: none;
+  border: 0;
+  font-size: calc(12px + 1vmin);
+  color: ${props => props.theme.text};
+  padding: 0 10px 0 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  z-index: 2;
+`;
+
+const ChevronDown = styled(FaChevronDown)<any>`
   color: ${props => props.theme.text};
   cursor: pointer;
-  
-  animation-name: ${props => props.showExitAnimation ? 'rotateDown' : 'rotateUp'};
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
+`;
+
+const ChevronUp = styled(FaChevronUp)<any>`
+  color: ${props => props.theme.text};
+  cursor: pointer;
 `;
 
 const ItemOptionContainer = styled.div<any>`
@@ -97,22 +148,24 @@ const ItemOptionContainer = styled.div<any>`
   position: absolute;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
+  background-color: ${props => props.theme.themeBackground};
+  box-shadow: 0 0 2px 0 ${props => props.theme.slateGray};
   border-radius: 0 0 12px 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
 
-  animation-name: ${props => props.showExitAnimation ? 'fadeOut' : 'fadeIn'};
+  animation-name: ${props => !!props.showexitanimation ? 'fadeOut' : 'fadeIn'};
   animation-duration: 0.5s;
   animation-fill-mode: both;
 `;
 
 const ItemOptionText = styled.span`
   font-size: calc(12px + 1vmin);
-  color: ${props => props.theme.white};
-  padding: 5px 15px;
-  
-  :hover{
-    background-color: rgba(255,255,255, 0.2);
+  color: ${props => props.theme.text};
+  padding: 10px 15px;
+
+  :hover {
+    background-color: ${props => props.theme.slateGray};
+    color: ${props => props.theme.white};
     cursor: pointer;
   }
 `;

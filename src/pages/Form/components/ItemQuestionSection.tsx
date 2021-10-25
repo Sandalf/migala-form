@@ -17,7 +17,6 @@ export const ItemQuestionSection = ({ item, toggleExpanded }: ItemQuestionSectio
 
     useEffect(() => {
         setIsExpanded(item.isExpanded)
-        console.log("Aqui pase")
     }, [item.isExpanded])
 
     const getTotalCounter = () => {

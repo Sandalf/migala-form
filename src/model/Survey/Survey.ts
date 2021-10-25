@@ -15,15 +15,8 @@ export const Survey: Array<SurveyModel> = [
                 questions: [
                     {
                         id: generateUniqSerial(),
-                        title: "¿Como te llamas?",
-                        label: "Ingresa tu nombre",
-                        placeHolder: "Juan Lopez",
-                        type: "input"
-                    },
-                    {
-                        id: generateUniqSerial(),
                         title: "¿Cual es tu genero?",
-                        type: "options",
+                        type: "select",
                         options: [
                             {
                                 id: generateUniqSerial(),
@@ -38,17 +31,17 @@ export const Survey: Array<SurveyModel> = [
                                 value: "No binario"
                             }
                         ]
+                    },
+                    {
+                        id: generateUniqSerial(),
+                        title: "¿Cuando naciste?",
+                        type: "date"
                     }
                 ]
             },
             {
                 id: generateUniqSerial(),
                 questions: [
-                    {
-                        id: generateUniqSerial(),
-                        title: "¿Cuando naciste?",
-                        type: "date"
-                    },
                     {
                         id: generateUniqSerial(),
                         title: "¿Donde vives actualmente?",
