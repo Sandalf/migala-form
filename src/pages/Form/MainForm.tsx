@@ -46,12 +46,14 @@ const MainContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   padding: 50px 30px 10px;
-  
   transition: all 1s;
+  @media (max-width: 320px) {
+    padding: 50px 10px 10px;
+  }
 `;
 
 const MainInnerContainer = styled.div`
-  border: 1px solid ${props => props.theme.slateGray};
+  border: 1px solid ${(props) => props.theme.slateGray};
   border-bottom: 0;
 
   transition: all 1s;

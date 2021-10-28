@@ -43,6 +43,9 @@ const CheckBoxContainer = styled.div`
 const CheckBoxItemContainer = styled.div`
   padding: 2px 10%;
   width: 100%;
+  @media (max-width: 425px) {
+    padding: 0px;
+  }
 `;
 
 const CheckBox = styled.input`
