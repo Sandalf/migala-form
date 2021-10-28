@@ -16,7 +16,7 @@ export const MainButton = ({ title, onAction, className }: MainButtonProps) => {
 }
 
 const ButtonContainer = styled.div`
-  background: ${props => props.theme.buttonBackground};
+  background: ${(props) => props.theme.buttonBackground};
   border-radius: 10px;
   cursor: pointer;
   height: 45px;
@@ -24,9 +24,9 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 10px
+  margin: 0 10px;
 `;
 
 const ButtonText = styled.h3`
-  color: ${props => props.theme.buttonText};
+  color: ${(props) => props.theme.buttonText};
 `;

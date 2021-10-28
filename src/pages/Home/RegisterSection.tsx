@@ -65,6 +65,9 @@ const RegisterSectionContainer = styled.div`
   padding: 50px 30px;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 325px) {
+    padding: 0px;
+  }
 `;
 
 const ButtonContainer = styled.div`

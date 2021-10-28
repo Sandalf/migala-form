@@ -145,7 +145,6 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
         </QuestionsContainer>
     )
 }
-
 const QuestionsContainer = styled.div`
   display: flex;
   flex-flow: column;
@@ -154,7 +153,7 @@ const QuestionsContainer = styled.div`
   min-height: 600px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: ${props => props.theme.slateGray};
+  border-bottom-color: ${(props) => props.theme.slateGray};
 `;
 
 const QuestionInputsContainer = styled.div`
@@ -165,10 +164,13 @@ const QuestionInputsContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 0 45px;
+  @media (max-width: 425px) {
+    padding: 0px;
+  }
 `;
 
 const QuestionSingle = styled.div`
-    width: 100%;
+  width: 100%;
 `;
 
 const QuestionTitle = styled(LightText)`
