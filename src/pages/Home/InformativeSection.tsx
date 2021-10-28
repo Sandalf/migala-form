@@ -61,6 +61,9 @@ const CheckBoxContainer = styled.div`
   align-items: baseline;
   max-width: 50vmin;
   padding: 20px 0;
+  @media (max-width: 425px) {
+    max-width: 80vmin
+  }
 `;
 
 const CheckBox = styled.input`

@@ -37,23 +37,26 @@ export const Header = ({ showContent = () => {}, expanded = false }: HeaderProps
 
 export const HeaderContainer = styled.div<any>`
   width: 100%;
-  height: ${props => props.isExpanded ? 30 : 100}vh;
-  background: ${props => props.theme.headerBackground};
+  height: ${(props) => (props.isExpanded ? 30 : 100)}vh;
+  background: ${(props) => props.theme.headerBackground};
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  
-  border-radius: ${props => props.isExpanded ? 15 : 100};
-  
+
+  border-radius: ${(props) => (props.isExpanded ? 15 : 100)};
+
   transition: all 1s;
 `;
 
 const MainImageLogo = styled.img`
   width: calc(300px + 10vh);
+  /* media query to max phone width */
+  @media (max-width: 425px) {
+    width: 90%;
+  }
 `;
-
 
 const SwipeDownContainer = styled.div`
   cursor: pointer;
@@ -64,7 +67,7 @@ const Description = styled.p`
   font-weight: normal;
   font-family: "Open Sans", serif;
   font-size: calc(12px + 1vmin);
-  color: ${props => props.theme.white};
+  color: ${(props) => props.theme.white};
 `;
 
 const Label = styled.p`
@@ -72,6 +75,6 @@ const Label = styled.p`
   font-weight: bold;
   font-family: "Open Sans", serif;
   font-size: calc(12px + 2vmin);
-  color: ${props => props.theme.white};
+  color: ${(props) => props.theme.white};
   padding: 5px 0;
 `;
