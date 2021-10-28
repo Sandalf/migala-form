@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
 import {FaChevronDown, FaChevronUp} from "react-icons/all";
 import {Option} from "src/model/Survey/SurveyModel";
+import {FormContext} from "src/context/FormContext";
 
 interface SelectInputProps {
     placeHolder?: string,
     options: Array<Option>,
+    field?:any,
     withInputContainer?: Boolean,
     onSelectionChange?: (option?: Option) => void,
     inputProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -14,14 +16,29 @@ interface SelectInputProps {
 export const SelectInput = ({
         placeHolder,
         options,
+        field,
         withInputContainer = false,
         inputProps = {},
         onSelectionChange = () => {}
     }: SelectInputProps) => {
 
+    const {
+        formResponses, setFormResponses
+    } = useContext(FormContext)
+
     const [showExitAnimation, setShowExitAnimation] = useState(!withInputContainer)
     const [isOpen, setIsOpen] = useState(!!withInputContainer)
     const [label, setLabel] = useState(placeHolder)
+
+    useEffect(() => {
+        if(!field){
+            return
+        }
+
+        let dataSaved: Option = formResponses[field] || {}
+        setLabel(dataSaved.value || "")
+
+    }, [])
 
     const toggleOpen = () => {
         setShowExitAnimation(isOpen)
@@ -34,6 +51,12 @@ export const SelectInput = ({
         toggleOpen()
         setLabel(option.value)
         onSelectionChange(option)
+
+        if(field){
+            let newObject:any = {}
+            newObject[field] = option
+            setFormResponses((prevState:any) => ({...prevState, ...newObject}))
+        }
     }
 
     return (
