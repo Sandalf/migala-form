@@ -17,17 +17,18 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "¿Cual es tu genero?",
                         type: "select",
+                        field: "gender",
                         options: [
                             {
-                                id: generateUniqSerial(),
+                                id: "gender01",
                                 value: "Masculino"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "gender02",
                                 value: "Femenino"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "gender03",
                                 value: "No binario"
                             }
                         ]
@@ -35,7 +36,8 @@ export const Survey: Array<SurveyModel> = [
                     {
                         id: generateUniqSerial(),
                         title: "¿Cuando naciste?",
-                        type: "date"
+                        type: "date",
+                        field: "birthday",
                     }
                 ]
             },
@@ -45,7 +47,8 @@ export const Survey: Array<SurveyModel> = [
                     {
                         id: generateUniqSerial(),
                         title: "¿Donde vives actualmente?",
-                        type: "address"
+                        type: "address",
+                        field: "address",
                     }
                 ]
             },
@@ -56,18 +59,21 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "¿Cuando llegue el momento \ncómo podemos contactarte?",
                         type: "multiple-inputs",
+                        field: '',
                         inputs: [
                             {
                                 id: generateUniqSerial(),
                                 name: "email",
                                 placeHolder: "algo@algo.com",
-                                label: "Ingresa tu correo electronico"
+                                label: "Ingresa tu correo electronico",
+                                field: "email"
                             },
                             {
                                 id: generateUniqSerial(),
                                 name: "telefono celular a diez digitos",
                                 placeHolder: "(555) 555 5555",
-                                label: "Ingresa tu número a 10 digitos"
+                                label: "Ingresa tu número a 10 digitos",
+                                field: "phone"
                             }
                         ]
                     }
@@ -80,18 +86,21 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "Ahora sí, saca tu credencial de elector\nrecuerda que este campo es opcional, \nsi decides ponerlo nos ayudas a saber \ndónde tenemos presencia y validar tu información.\nSi aún no cumples 18 años no te preocupes\ndéjalo vacío.",
                         type: "multiple-inputs",
+                        field: "",
                         inputs: [
                             {
                                 id: generateUniqSerial(),
                                 name: "Clave de elector",
                                 placeHolder: "987987987989",
-                                label: "Ingresa clave"
+                                label: "Ingresa clave",
+                                field: "electorkey"
                             },
                             {
                                 id: generateUniqSerial(),
                                 name: "Distrito Electoral",
                                 placeHolder: "9999",
-                                label: "Ingresa distrito"
+                                label: "Ingresa distrito",
+                                field: "electoralDistrict"
                             }
                         ]
                     }
@@ -111,25 +120,26 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "¿Actualmente cuál es tu ocupación?\nPuedes seleccionar hasta tres casillas",
                         type: "checkbox",
+                        field: "ocupation",
                         options: [
                             {
-                                id: generateUniqSerial(),
+                                id: "ocupation01",
                                 value: "Empleado en el sector privado"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "ocupation02",
                                 value: "Empleado en el sector publico"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "ocupation03",
                                 value: "Estudiante"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "ocupation04",
                                 value: "Otro 1"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "ocupation05",
                                 value: "Otro 2"
                             }
                         ]
@@ -146,7 +156,8 @@ export const Survey: Array<SurveyModel> = [
                         placeHolder: "Selecciona una categoria de empleado privado",
                         options: [
                             ...PrivateEmployeeCategories
-                        ]
+                        ],
+                        field: "employeeSelect"
                     },
                     {
                         id: generateUniqSerial(),
@@ -155,7 +166,8 @@ export const Survey: Array<SurveyModel> = [
                         placeHolder: "Selecciona una categoria de empleado publico",
                         options: [
                             ...PublicEmployeeCategories
-                        ]
+                        ],
+                        field: "publicSelect"
                     },
                     {
                         id: generateUniqSerial(),
@@ -164,7 +176,8 @@ export const Survey: Array<SurveyModel> = [
                         placeHolder: "Selecciona una categoria de Estudiante",
                         options: [
                             ...StudentCategories
-                        ]
+                        ],
+                        field: "studenSelect"
                     }
                 ]
             },
@@ -189,7 +202,8 @@ export const Survey: Array<SurveyModel> = [
                                 id: generateUniqSerial(),
                                 value: "Preparatoria"
                             }
-                        ]
+                        ],
+                        field: "studyLevel"
                     },
                     {
                         id: generateUniqSerial(),
@@ -197,14 +211,15 @@ export const Survey: Array<SurveyModel> = [
                         type: "options",
                         options: [
                             {
-                                id: generateUniqSerial(),
+                                id: "workInYourStudy01",
                                 value: "Si"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "workInYourStudy02",
                                 value: "No"
                             }
-                        ]
+                        ],
+                        field: "workInYourStudy"
                     }
                 ]
             },
@@ -232,7 +247,8 @@ export const Survey: Array<SurveyModel> = [
                                 id: generateUniqSerial(),
                                 value: "Labor comunitaria"
                             }
-                        ]
+                        ],
+                        field: "hobby"
                     }
                 ]
             },
@@ -250,6 +266,7 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "¿Cómo te gustaría participar en este proyecto?\nContesta con honestidad, no pasa nada y selecciona solo una opción.",
                         type: "checkbox",
+                        field: "workInMigala",
                         options: [
                             {
                                 id: generateUniqSerial(),
@@ -282,6 +299,7 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "¿A qué actividades podrías integrarte?\nPuedes seleccionar hasta tres casillas.",
                         type: "checkbox",
+                        field: "workActivities",
                         options: [
                             {
                                 id: generateUniqSerial(),
@@ -338,25 +356,26 @@ export const Survey: Array<SurveyModel> = [
                         id: generateUniqSerial(),
                         title: "¿Cuantas horas podrias dedicarle a la semana a dichas actividades?.",
                         type: "radio",
+                        field: "hoursForWeek",
                         options: [
                             {
-                                id: generateUniqSerial(),
+                                id: "hoursForweek01",
                                 value: "2-4"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "hoursForweek02",
                                 value: "4-8"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "hoursForweek03",
                                 value: "8-12"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "hoursForweek04",
                                 value: "12-16"
                             },
                             {
-                                id: generateUniqSerial(),
+                                id: "hoursForweek05",
                                 value: "16 o mas"
                             },
                         ]
@@ -372,6 +391,7 @@ export const Survey: Array<SurveyModel> = [
                             "que tengamos la capacidad para que estemos todos conectad@s\n" +
                             "¿cuentas con lo siguiente?",
                         type: "checkbox",
+                        field: "digitalDevices",
                         options: [
                             {
                                 id: generateUniqSerial(),

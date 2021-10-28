@@ -8,6 +8,8 @@ export interface Input {
     name: string;
     label: string;
     placeHolder: string;
+
+    field: string
 }
 
 export interface Question {
@@ -26,6 +28,8 @@ export interface Question {
     placeHolder?: string;
     options?: Option[];
     inputs?: Input[];
+
+    field: string
 }
 
 export interface QuestionsGroup {

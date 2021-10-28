@@ -1,13 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
+interface DatePickerProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+    label?: string
+}
 
-export const DatePicker = () => {
+export const DatePicker = ({ value, onChange, disabled }: DatePickerProps) => {
 
 
     return(
         <DatePickerContainer className="animated fadeIn">
-            <InputItem type={"date"} />
+            <InputItem
+                type={"date"}
+                value={value}
+                onChange={onChange}
+                disabled={disabled}
+            />
         </DatePickerContainer>
     )
 }

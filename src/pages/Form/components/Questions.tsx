@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
-import {QuestionsGroup} from "src/model/Survey/SurveyModel";
+import {Option, QuestionsGroup} from "src/model/Survey/SurveyModel";
 import {Input} from "src/theme/components/Input/Input";
 import {Options} from "src/theme/components/Options/Options";
 import {DatePicker} from "src/theme/components/DatePicker/DatePicker";
@@ -11,6 +11,7 @@ import {SelectInput} from "src/theme/components/Select/SelectInput";
 import {LightText} from "src/theme/styles/generalstyles/Text";
 import {MainButton} from "src/theme/components/MainButton/MainButton";
 import {RadioInputs} from "src/theme/components/RadioInputs/RadioInputs";
+import {FormContext} from "src/context/FormContext";
 
 interface QuestionsProps {
     questions: Array<QuestionsGroup>,
@@ -18,6 +19,7 @@ interface QuestionsProps {
 }
 export const Questions = ({ questions, changeSurveySection }: QuestionsProps) => {
 
+    const { formResponses, setFormResponses } = useContext(FormContext)
 
     const [currentIndexSurveyGroup, setCurrentIndexSurveyGroup] = useState(0)
     const [currentGroup, setCurrentGroup] = useState(questions[currentIndexSurveyGroup])
@@ -56,26 +58,45 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
         setCurrentIndexSurveyGroup(prevState => prevState - 1)
     }
 
+    const handleInputChange = (value:any, field:string) => {
+        let newObject:any = {}
+        newObject[field] = value
+
+        console.log("Epale perros")
+        setFormResponses((prevState: any) => ({...prevState, ...newObject}))
+    }
 
     return(
         <QuestionsContainer>
             <QuestionInputsContainer>
                 { currentGroup.questions.map( question => (
                     <QuestionSingle key={question.id}>
+
                         { !!question.title &&
                         <QuestionTitle>{question.title}</QuestionTitle>
                         }
 
                         { question.type === 'input' &&
-                        <Input label={question.label} placeholder={question.placeHolder}/>
+                        <Input
+                            label={question.label}
+                            placeholder={question.placeHolder}
+                            value={(formResponses[question.field] || "")}
+                            onChange={({target:{value}}) => handleInputChange(value, question.field)}
+                        />
                         }
 
                         { question.type === 'options' &&
-                        <Options optionsList={question.options || []}/>
+                        <Options
+                            optionsList={question.options || []}
+                            field={question.field}
+                        />
                         }
 
                         { question.type === 'date' &&
-                        <DatePicker />
+                        <DatePicker
+                            value={(formResponses[question.field] || "")}
+                            onChange={({target:{value}}) => handleInputChange(value, question.field)}
+                        />
                         }
 
                         { question.type === 'address' &&
@@ -87,15 +108,27 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
                         }
 
                         { question.type === 'checkbox' &&
-                        <CheckBoxInputsElement options={question.options || []} />
+                        <CheckBoxInputsElement
+                            options={question.options || []}
+                            field={question.field}
+                        />
                         }
 
                         { question.type === 'select' &&
-                        <SelectInput placeHolder={question.placeHolder} options={question.options || []}/>
+                        <SelectInput
+                            placeHolder={question.placeHolder}
+                            options={question.options || []}
+                            field={question.field}
+                            onSelectionChange={(value) => handleInputChange(value, question.field)}
+                        />
                         }
 
                         { question.type === 'radio' &&
-                        <RadioInputs placeHolder={question.placeHolder} options={question.options || []}/>
+                        <RadioInputs
+                            placeHolder={question.placeHolder}
+                            field={question.field}
+                            options={question.options || []}
+                        />
                         }
 
                     </QuestionSingle>
