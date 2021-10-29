@@ -100,7 +100,7 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
                         }
 
                         { question.type === 'address' &&
-                        <Address />
+                        <Address field={question.field}/>
                         }
 
                         { question.type === 'multiple-inputs' &&
