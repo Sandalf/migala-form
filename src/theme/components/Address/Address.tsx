@@ -1,17 +1,15 @@
 import React, {useRef, useState} from "react";
 import styled from "styled-components";
 import {SelectInput} from "src/theme/components/Select/SelectInput";
-import {ApiService} from "src/theme/services/ApiService";
-import {environment} from "src/environments/environment";
 import {Option} from "src/model/Survey/SurveyModel";
-import {ZipCodesResponse} from "src/model/ZipCodes/ZipCodesResponse";
+import {ZipCodesResponse, ZipCode} from "src/model/ZipCodes/ZipCodesResponse";
 import {RegularText} from "src/theme/styles/generalstyles/Text";
+import Geonames from "geonames.js";
 
 export const Address = () => {
 
     const [ selection, setSelection ]:any = useState({})
 
-    const _apiService = useRef(new ApiService()).current
     const timeOut:any = useRef(null)
 
     const [locations, setLocations]:any = useState([])
@@ -23,24 +21,44 @@ export const Address = () => {
         }, 500)
     }
 
-    const callToZipCodeInformation = (value: string) => {
-        _apiService.get(`${environment.zipCodeServer}colonias/cp/`, {valor: value}, null, false).then((res: any) => {
-            let resString = res.trim()
-            let response: Array<ZipCodesResponse> = JSON.parse(resString)
 
-            let options: Array<Option> = [];
+    const getNeighborhoodByZipCode = async (postalcode: any)  => {
+        const username = process.env.REACT_APP_GEONAMES_USER;
+        const geonames = Geonames({
+            username: username,
+            lan: "es",
+            encoding: "JSON"
+        });
 
-            response.forEach( (responseItem:any, index: number) => {
-                options.push({
-                    id: `${responseItem.CP}${index}`,
-                    value: `${responseItem.CP} - ${responseItem.Colonia} - ${responseItem.Municipio} - ${responseItem.Entidad}`
-                })
+        const res: any = await geonames.postalCodeLookup({ postalcode, country: "MX" });
+        return { 
+            postalCodes: res.postalcodes.map((el: any) => {
+                return {
+                    cp: el.postalcode,
+                    colonia: el.placeName,
+                    municipio: el.adminName2,
+                    estado: el.adminName1
+                }
+            
             })
-            setLocations(options)
-        }).catch( err => {
-            console.log(err)
-            setLocations([])
-        })
+        }
+    }    
+
+    const callToZipCodeInformation = (value: string) => {
+        getNeighborhoodByZipCode(value)
+            .then((res: ZipCodesResponse) => {
+                const options: Array<Option> = [];
+                res.postalCodes.forEach((zipCode: ZipCode, index: number) => {
+                    options.push({
+                        id: `${zipCode.cp}${index}`,
+                        value: `${zipCode.cp} - ${zipCode.colonia} - ${zipCode.municipio} - ${zipCode.estado}`
+                    })
+                })
+                setLocations(options)
+            }).catch(err => {
+                console.log(err)
+                setLocations([])
+            })
     }
 
     const handleSelection = (option?: Option) => {
