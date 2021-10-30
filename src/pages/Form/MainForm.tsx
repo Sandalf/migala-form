@@ -8,10 +8,22 @@ export const MainForm = () => {
 
     const [survey, setSurvey] = useState([...Survey])
 
+    const getSurveyClone = () => [...survey]
+
+    const getSurveyByItem = (item: SurveyModel) => {
+
+        return getSurveyClone().find( f => f.id === item.id )
+    }
+
+    const getSurveyIndexByItem = (item: SurveyModel) => {
+        let surveyClone = getSurveyClone()
+        return surveyClone.findIndex( f => f.id === item.id )
+    }
+
     const toggleExpanded = (item: SurveyModel) => {
 
-        let surveyClone = [...survey]
-        let foundSurvey = surveyClone.find( f => f.id === item.id )
+        let surveyClone = getSurveyClone()
+        let foundSurvey = getSurveyByItem(item)
 
         if(item.isExpanded && foundSurvey ){
             foundSurvey.isExpanded = false
@@ -27,11 +39,32 @@ export const MainForm = () => {
         }
     }
 
+    const showNextToggleExpanded = (item: SurveyModel, type: 'next' | 'prev') => {
+        let foundSurveyIndex = getSurveyIndexByItem(item)
+
+        if(type === 'next'){
+            if(foundSurveyIndex !== -1 && (foundSurveyIndex + 1 <= survey.length - 1)){
+                let itemToExpand = {...getSurveyClone()[foundSurveyIndex + 1]}
+                toggleExpanded(itemToExpand)
+            }
+        }else{
+            if(foundSurveyIndex !== -1 && (foundSurveyIndex - 1 >= 0)){
+                let itemToExpand = {...getSurveyClone()[foundSurveyIndex - 1]}
+                toggleExpanded(itemToExpand)
+            }
+        }
+    }
+
     return (
         <MainContainer className={"animated slideInUp"}>
             <MainInnerContainer>
                 {survey.map((m, index) => (
-                    <ItemQuestionSection item={m} key={m.id} toggleExpanded={toggleExpanded}/>
+                    <ItemQuestionSection
+                        item={m}
+                        key={m.id}
+                        toggleExpanded={toggleExpanded}
+                        showNextToggleExpanded={showNextToggleExpanded}
+                    />
                 ))
                 }
             </MainInnerContainer>

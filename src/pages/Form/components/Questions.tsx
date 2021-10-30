@@ -12,12 +12,16 @@ import {LightText} from "src/theme/styles/generalstyles/Text";
 import {MainButton} from "src/theme/components/MainButton/MainButton";
 import {RadioInputs} from "src/theme/components/RadioInputs/RadioInputs";
 import {FormContext} from "src/context/FormContext";
+import {useValidationHook} from "../../../hooks/validation-hook";
 
 interface QuestionsProps {
-    questions: Array<QuestionsGroup>,
-    changeSurveySection: () => void
+    questionsProps: Array<QuestionsGroup>,
+    changeSurveySection: (type: 'next' | 'prev') => void
 }
-export const Questions = ({ questions, changeSurveySection }: QuestionsProps) => {
+export const Questions = ({ questionsProps, changeSurveySection }: QuestionsProps) => {
+
+    //Custom Hook para realizar validaciones cada que se cambia de pregunta
+    const [ questions, applyFormValidations ] = useValidationHook(questionsProps)
 
     const { formResponses, setFormResponses } = useContext(FormContext)
 
@@ -30,30 +34,21 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
 
     const incrementCounter = () => {
         if(currentIndexSurveyGroup === (questions.length - 1)){
-            changeSurveySection()
+            changeSurveySection('next')
             return
         }
 
-        /*let foundDateInput = questions[currentIndexSurveyGroup + 1].questions.findIndex( f => f.type === 'date' )
-
-        if(foundDateInput !== -1){
-            questions[currentIndexSurveyGroup + 1].questions.splice(0, 1)
-        }*/
-
-        setCurrentIndexSurveyGroup(prevState => prevState + 1)
+        applyFormValidations(currentGroup, () => {
+            console.log("response")
+            setCurrentIndexSurveyGroup(prevState => prevState + 1)
+        })
     }
 
     const decrementCounter = () => {
         if(currentIndexSurveyGroup === 0){
-            changeSurveySection()
+            changeSurveySection('prev')
             return
         }
-
-        /*let foundDateInput = questions[currentIndexSurveyGroup + 1].questions.findIndex( f => f.type === 'date' )
-
-        if(foundDateInput !== -1){
-            questions[currentIndexSurveyGroup + 1].questions.splice(0, 1)
-        }*/
 
         setCurrentIndexSurveyGroup(prevState => prevState - 1)
     }
@@ -62,7 +57,6 @@ export const Questions = ({ questions, changeSurveySection }: QuestionsProps) =>
         let newObject:any = {}
         newObject[field] = value
 
-        console.log("Epale perros")
         setFormResponses((prevState: any) => ({...prevState, ...newObject}))
     }
 
