@@ -21,6 +21,12 @@ import {Services} from "../model/Survey/studyAreas/Services";
 import {ArtHumanity} from "../model/Survey/studyAreas/ArtHumanity";
 import {Health} from "../model/Survey/studyAreas/Health";
 import {AgronomyVeterinary} from "../model/Survey/studyAreas/AgronomyVeterinary";
+import {ArtisticHobbies} from "../model/Survey/hobbies/ArtisticHobbies";
+import {PoliticHobbies} from "../model/Survey/hobbies/PoliticHobbies";
+import {SportHobbies} from "../model/Survey/hobbies/SportHobbies";
+import {ONGHobbies} from "../model/Survey/hobbies/ONGHobbies";
+import {HelpGroupHobbies} from "../model/Survey/hobbies/HelpGroupHobbies";
+import {CommunityHobbies} from "../model/Survey/hobbies/CommunityHobbies";
 
 /**
  *
@@ -333,7 +339,7 @@ export const useValidationHook = (questionsProps: Array<QuestionsGroup>) => {
                             title: "Especifica tu especialidad artistica",
                             type: "select",
                             placeHolder: "Selecciona una opción",
-                            options: PrivateEmployeeCategories,
+                            options: ArtisticHobbies,
                             field: `hobby_speciality_${index}`
                         })
                         break;
@@ -343,7 +349,7 @@ export const useValidationHook = (questionsProps: Array<QuestionsGroup>) => {
                             title: "Especifica tu especialidad politica",
                             type: "select",
                             placeHolder: "Selecciona una opción",
-                            options: PublicEmployeeCategories,
+                            options: PoliticHobbies,
                             field: `hobby_speciality_${index}`
                         })
                         break;
@@ -353,7 +359,7 @@ export const useValidationHook = (questionsProps: Array<QuestionsGroup>) => {
                             title: "Especifica tu especialidad deportiva",
                             type: "select",
                             placeHolder: "Selecciona una opción",
-                            options: StudentCategories,
+                            options: SportHobbies,
                             field: `hobby_speciality_${index}`
                         })
                         break;
@@ -363,7 +369,7 @@ export const useValidationHook = (questionsProps: Array<QuestionsGroup>) => {
                             title: "Especifica tu especialidad en una ONG",
                             type: "select",
                             placeHolder: "Selecciona una opción",
-                            options: UnEmployeeCategories,
+                            options: ONGHobbies,
                             field: `hobby_speciality_${index}`
                         })
                         break;
@@ -373,7 +379,7 @@ export const useValidationHook = (questionsProps: Array<QuestionsGroup>) => {
                             title: "Especifica tu especialidad en el grupo de ayuda",
                             type: "select",
                             placeHolder: "Selecciona una opción",
-                            options: InformalEmployeeCategories,
+                            options: HelpGroupHobbies,
                             field: `hobby_speciality_${index}`
                         })
                         break;
@@ -383,7 +389,7 @@ export const useValidationHook = (questionsProps: Array<QuestionsGroup>) => {
                             title: "Especifica tu especialidad en labor comunitaria",
                             type: "select",
                             placeHolder: "Selecciona una opción",
-                            options: HomeEmployeeCategories,
+                            options: CommunityHobbies,
                             field: `hobby_speciality_${index}`
                         })
                         break;
