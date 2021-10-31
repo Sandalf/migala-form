@@ -165,6 +165,7 @@ const QuestionInputsContainer = styled.div`
 
 const QuestionSingle = styled.div`
   width: 100%;
+  padding: 15px 0;
 `;
 
 const QuestionTitle = styled(LightText)`

@@ -1,8 +1,8 @@
 import {SurveyModel} from "../SurveyModel";
 import {generateUniqSerial} from "../../../utils/GeneralUtils";
-import {PrivateEmployeeCategories} from "../ocupationCategories/PrivateEmployeeCategories";
-import {PublicEmployeeCategories} from "../ocupationCategories/PublicEmployeeCategories";
-import {StudentCategories} from "../ocupationCategories/StudentCategories";
+import {PrivateEmployeeCategories} from "../occupationCategories/PrivateEmployeeCategories";
+import {PublicEmployeeCategories} from "../occupationCategories/PublicEmployeeCategories";
+import {StudentCategories} from "../occupationCategories/StudentCategories";
 
 export const LaborInformation: SurveyModel = {
     id: generateUniqSerial(),
@@ -10,99 +10,39 @@ export const LaborInformation: SurveyModel = {
     backgroundColor: "#7147c2",
     questionsGroups: [
         {
-            id: generateUniqSerial(),
+            id: "edu_level_section",
             questions: [
                 {
-                    id: generateUniqSerial(),
-                    title: "¿Actualmente cuál es tu ocupación?\nPuedes seleccionar hasta tres casillas",
-                    type: "checkbox",
-                    field: "ocupation",
-                    options: [
-                        {
-                            id: "ocupation01",
-                            value: "Empleado en el sector privado"
-                        },
-                        {
-                            id: "ocupation02",
-                            value: "Empleado en el sector publico"
-                        },
-                        {
-                            id: "ocupation03",
-                            value: "Estudiante"
-                        },
-                        {
-                            id: "ocupation04",
-                            value: "Otro 1"
-                        },
-                        {
-                            id: "ocupation05",
-                            value: "Otro 2"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            id: generateUniqSerial(),
-            questions: [
-                {
-                    id: generateUniqSerial(),
-                    title: "¿Puedes especificar un poco más?",
+                    id: "edu_level_questions",
+                    title: "¿Cuál ha sido tu último grado de estudios que hayas concluido?",
                     type: "select",
-                    placeHolder: "Selecciona una categoria de empleado privado",
-                    options: [
-                        ...PrivateEmployeeCategories
-                    ],
-                    field: "employeeSelect"
-                },
-                {
-                    id: generateUniqSerial(),
-                    title: "",
-                    type: "select",
-                    placeHolder: "Selecciona una categoria de empleado publico",
-                    options: [
-                        ...PublicEmployeeCategories
-                    ],
-                    field: "publicSelect"
-                },
-                {
-                    id: generateUniqSerial(),
-                    title: "",
-                    type: "select",
-                    placeHolder: "Selecciona una categoria de Estudiante",
-                    options: [
-                        ...StudentCategories
-                    ],
-                    field: "studenSelect"
-                }
-            ]
-        },
-        {
-            id: generateUniqSerial(),
-            questions: [
-                {
-                    id: generateUniqSerial(),
-                    title: "¿Qué estudiaste?",
-                    type: "select",
-                    placeHolder: "Selecciona una opción",
+                    field: "edu_level",
                     options: [
                         {
-                            id: generateUniqSerial(),
+                            id: "Primaria",
                             value: "Primaria"
                         },
                         {
-                            id: generateUniqSerial(),
+                            id: "Secundaria",
                             value: "Secundaria"
                         },
                         {
-                            id: generateUniqSerial(),
+                            id: "Preparatoria",
                             value: "Preparatoria"
-                        }
-                    ],
-                    field: "studyLevel"
+                        },
+                        {
+                            id: "Universidad",
+                            value: "Universidad"
+                        },
+                        {
+                            id: "Posgrado",
+                            value: "Posgrado"
+                        },
+
+                    ]
                 },
                 {
-                    id: generateUniqSerial(),
+                    id: "work_in_your_study_section",
                     title: "¿Trabajas en lo que estudiaste?",
                     type: "options",
                     options: [
@@ -120,27 +60,159 @@ export const LaborInformation: SurveyModel = {
             ]
         },
         {
-            id: generateUniqSerial(),
+            id: "occupation_section",
             questions: [
                 {
-                    id: generateUniqSerial(),
+                    id: "occupation_questions",
+                    title: "¿Actualmente cuál es tu ocupación? \nPuedes seleccionar hasta tres casillas",
+                    type: "checkbox",
+                    field: "occupation",
+                    options: [
+                        {
+                            id: "private_employee",
+                            value: "Empleado en el sector privado"
+                        },
+                        {
+                            id: "public_employee",
+                            value: "Empleado en el sector publico"
+                        },
+                        {
+                            id: "student",
+                            value: "Estudiante"
+                        },
+                        {
+                            id: "unemployed",
+                            value: "Desemplead@ / Pensionad@"
+                        },
+                        {
+                            id: "informal_employee",
+                            value: "Emplead@ informal"
+                        },
+                        {
+                            id: "home_employee",
+                            value: "Trabajo doméstico y/o de cuidado"
+                        },
+                        {
+                            id: "own_business",
+                            value: "Negocio propio y/o familiar"
+                        },
+                        {
+                            id: "freelancer",
+                            value: "Freelancer"
+                        },
+                        {
+                            id: "teacher",
+                            value: "Docencia / Academía"
+                        },
+                    ]
+                }
+            ]
+        },
+        {
+            id: "dynamic_categories_section",
+            questions: []
+        },
+        {
+            id: "educational_formation_section",
+            questions: [
+                {
+                    id: "educational_formation_questions",
+                    title: "Ahora queremos conocer más sobre tu formación académica \nSelecciona el área de conocimiento en el que te especializas",
+                    type: "select",
+                    placeHolder: "Selecciona una opción",
+                    options: [
+                        {
+                            id: "social_sciences_admin",
+                            value: "Ciencias sociales, administración y derecho"
+                        },
+                        {
+                            id: "social_sciences_behavior",
+                            value: "Ciencias sociales y estudios del comportamiento"
+                        },
+                        {
+                            id: "engineering_manufacture_construction",
+                            value: "Ingeniería, manufactura y construcción "
+                        },
+                        {
+                            id: "education",
+                            value: "Educación"
+                        },
+                        {
+                            id: "natural_exact_sciences",
+                            value: "Ciencias naturales, exactas y de la computación"
+                        },
+                        {
+                            id: "math_statistic",
+                            value: "Matemáticas y estadística"
+                        },
+                        {
+                            id: "services",
+                            value: "Servicios"
+                        },{
+                            id: "art_humanity",
+                            value: "Artes y humanidades"
+                        },
+                        {
+                            id: "health",
+                            value: "Salud"
+                        },
+                        {
+                            id: "agronomy_veterinary",
+                            value: "Agronomía y veterinaria"
+                        },
+                        {
+                            id: "other_study_area",
+                            value: "Otro"
+                        }
+
+                    ],
+                    field: "studyArea"
+                },
+            ]
+        },
+        {
+            id: "educational_speciality_section",
+            questions: [
+                {
+                    id: "educational_speciality_questions",
+                    title: "¿Selecciona tu especialidad?",
+                    type: "select",
+                    placeHolder: "Selecciona una opción",
+                    options: [],
+                    field: "studySpeciality"
+                }
+            ]
+        },
+        {
+            id: "hobby_section",
+            questions: [
+                {
+                    id: "hobby_questions",
                     title: "¿En que actividades participas que no son de trabajo?\nPuedes seleccionar hasta tres casillas",
                     type: "checkbox",
                     options: [
                         {
-                            id: generateUniqSerial(),
+                            id: "hobby_artistic",
                             value: "Artisticas"
                         },
                         {
-                            id: generateUniqSerial(),
+                            id: "hobby_politic",
                             value: "Politicas"
                         },
                         {
-                            id: generateUniqSerial(),
+                            id: "hobby_sports",
+                            value: "Deportivas"
+                        },
+                        {
+                            id: "hobby_ong",
                             value: "ONG, organizaciones sin findes de lucro"
                         },
                         {
-                            id: generateUniqSerial(),
+                            id: "hobby_help_group",
+                            value: "Grupos de ayuda"
+                        },
+                        {
+                            id: "hobby_community",
                             value: "Labor comunitaria"
                         }
                     ],
@@ -148,5 +220,9 @@ export const LaborInformation: SurveyModel = {
                 }
             ]
         },
+        {
+            id: "hobby_specific_section",
+            questions: []
+        }
     ]
 }
