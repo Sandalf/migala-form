@@ -1,46 +1,45 @@
-# Getting Started with Create React App
+# Frontend de Proyecto Migala Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto fue creado con [Create React App](https://github.com/facebook/create-react-app). Para una explicación detallada sobre como funciona revisa su [documentación](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Como empezar
 
-In the project directory, you can run:
+Vas a necesitar tener instalados **NodeJS & NPM** en tu computadora.
+
+Una vez listo deberás correr `npm install` para descargar las depencias del proyecto.
+## Variables de ambiente
+Para el ambiente de desarrollo vas a necesitar una archivo llamado `.env.development.local` con las siguientes variables:
+
+```shell
+REACT_APP_GEONAMES_USER="migala_form"
+```
+
+Es recomendado generar tu propio usuario de [geonames](https://www.geonames.org/) para evitar gastar las peticiones durante el desarrollo, puedes crearle [aquí](https://www.geonames.org/login).
+## Scripts disponibles
+
+En la raíz del proyecto puedes correr:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Corre el sitio en modo desarollo.\
+Abre [http://localhost:3000](http://localhost:3000) para verla en el navegador.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
+Lanza el corredor de pruebas in modo watch para detectar cambios.
+Revisa esta sección sobre [correr pruebas](https://facebook.github.io/create-react-app/docs/running-tests) para más información.
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Contruye la app en modo producción dentro de la carpeta `build`.\
+Construye correctamente React en modo poducción y lo optimiza para mayor rendimiento.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+El aplicación construida es minificada y los nombres de los archivos incluyen hashes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+La aplicación está lista para ser lanzada!
 
-### `npm run eject`
+Revisa esta sección sobre [lanzamiento](https://facebook.github.io/create-react-app/docs/deployment) para más información.
+## Aprende más
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Puedes aprender más en la [documentación de Create React App](https://facebook.github.io/create-react-app/docs/getting-started).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Para aprender React revisa la [documentación de React](https://reactjs.org/).
