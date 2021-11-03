@@ -1,4 +1,4 @@
-# Frontend de Lupa Ciudadana
+# Frontend de Proyecto Migala Form
 
 Este proyecto fue creado con [Create React App](https://github.com/facebook/create-react-app). Para una explicación detallada sobre como funciona revisa su [documentación](https://github.com/facebook/create-react-app).
 
