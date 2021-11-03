@@ -8,10 +8,11 @@ import {Questions} from "src/pages/Form/components/Questions";
 
 interface ItemQuestionSectionProps {
     item: SurveyModel,
-    toggleExpanded: (item: SurveyModel) => void
+    toggleExpanded: (item: SurveyModel) => void,
+    showNextToggleExpanded: (item: SurveyModel, type: 'next' | 'prev') => void
 }
 
-export const ItemQuestionSection = ({ item, toggleExpanded }: ItemQuestionSectionProps) => {
+export const ItemQuestionSection = ({ item, toggleExpanded, showNextToggleExpanded }: ItemQuestionSectionProps) => {
 
     const [isExpanded, setIsExpanded] = useState(item.isExpanded)
 
@@ -42,7 +43,10 @@ export const ItemQuestionSection = ({ item, toggleExpanded }: ItemQuestionSectio
                 </RightSection>
             </ItemQuestionsHeader>
 
-            { isExpanded && <Questions questions={item.questionsGroups} changeSurveySection={() => {}}/> }
+            { isExpanded &&
+            <Questions questionsProps={item.questionsGroups}
+                       changeSurveySection={(type) => showNextToggleExpanded(item, type)}/>
+            }
         </ItemQuestionSectionContainer>
     )
 }

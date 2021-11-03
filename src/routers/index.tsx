@@ -56,8 +56,7 @@ export const MainRouter = () => {
 const MainContainer = styled.div`
   width: 100%;
   min-height: 100%;
-
-  overflow: auto;
+  overflow: inherit;
   transition: all 1s;
   background: ${ props => props.theme.themeBackground };
 `

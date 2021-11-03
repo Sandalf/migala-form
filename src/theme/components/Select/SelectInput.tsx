@@ -36,7 +36,7 @@ export const SelectInput = ({
         }
 
         let dataSaved: Option = formResponses[field] || {}
-        setLabel(dataSaved.value || "")
+        setLabel(dataSaved.value || (placeHolder || ""))
 
     }, [])
 

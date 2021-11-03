@@ -1,24 +1,45 @@
-import React, {useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import {SelectInput} from "src/theme/components/Select/SelectInput";
 import {Option} from "src/model/Survey/SurveyModel";
 import {ZipCodesResponse, ZipCode} from "src/model/ZipCodes/ZipCodesResponse";
 import {RegularText} from "src/theme/styles/generalstyles/Text";
 import Geonames from "geonames.js";
+import {FormContext} from "src/context/FormContext";
 
-export const Address = () => {
+interface AddressProps {
+    field: any
+}
+export const Address = ({ field }: AddressProps) => {
 
+    const {formResponses, setFormResponses} = useContext(FormContext)
+
+    const [inputValue, setInputValue] = useState("")
     const [ selection, setSelection ]:any = useState({})
 
     const timeOut:any = useRef(null)
 
     const [locations, setLocations]:any = useState([])
 
+    useEffect(() => {
+        if(!field) return
+
+        let option: Option = formResponses[field]
+
+        if(option){
+            setSelection(option)
+            setInputValue(option.value.replace(/\D/g, ""))
+        }
+
+    }, [])
+
     const handleOnChangeInput = (event:any) => {
         timeOut.current && clearTimeout(timeOut.current)
         timeOut.current = setTimeout(() => {
             callToZipCodeInformation(event.target.value)
         }, 500)
+
+        setInputValue(event.target.value)
     }
 
 
@@ -62,6 +83,10 @@ export const Address = () => {
     }
 
     const handleSelection = (option?: Option) => {
+        let newObject:any = {}
+        newObject[field] = option
+
+        setFormResponses((prevState:any) => ({...prevState, ...newObject}))
         setSelection(option)
     }
 
@@ -73,6 +98,7 @@ export const Address = () => {
                 onSelectionChange={handleSelection}
                 inputProps={{
                     type: "tel",
+                    value: inputValue,
                     onChange: handleOnChangeInput
                 }}
             />
